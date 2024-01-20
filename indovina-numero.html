@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indovina numero</title>
+    <style>
+        body {
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        let min, max;
+        const maxTentativi = 5;
+
+        do {
+            min = parseInt(prompt("Insersici minimo", ""));
+            max = parseInt(prompt("Insersici massimo", ""));
+        } while (isNaN(min) || isNaN(max));
+
+        if (min > max) { //controllo se il minimo è più grande del massimo, in questo caso vegnono invertiti
+            let dep = min;
+            min = max;
+            max = dep;
+        }
+
+        let numGenerato = Math.floor(Math.random() * max - min + 1) + min;
+        let tentativi = 0, numInserito;
+
+        for (tentativi; tentativi < maxTentativi; tentativi++) { //5 è il numero massimo di tentativi
+            numInserito = parseInt(prompt(`Inserisci il ${tentativi + 1} numero`, ""));
+
+            if (numInserito > numGenerato)
+                alert("Inserisci un numero più piccolo");
+            if (numInserito < numGenerato)
+                alert("Insersici un numero più grande");
+            if (numInserito == numGenerato) {
+                document.body.innerHTML = `Hai vinto in ${tentativi + 1} tentativi`;
+                break;
+            }
+        }
+        if (tentativi > maxTentativi - 1)
+            document.body.innerHTML = "Hai finito i tenativi";
+    </script>
+</body>
+
+</html>
